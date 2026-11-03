@@ -1,0 +1,16 @@
+question_id,question,prompt_version,model_name,latency_seconds,input_tokens,output_tokens,total_tokens,cost_usd,is_valid_json,json_parse_msg,response_status
+Q1,What is photosynthesis and why is it important for life on Earth?,v1,openai/gpt-oss-20b,0.7076,94,565,659,0.00017655,,N/A,success
+Q2,Explain the Pythagorean theorem and provide a real-world example.,v1,openai/gpt-oss-20b,1.0347,94,596,690,0.00018585,,N/A,success
+Q3,What is Newton's second law of motion and how is it applied in everyday life?,v1,openai/gpt-oss-20b,1.1554,97,767,864,0.00023737,,N/A,success
+Q4,What is the difference between mitosis and meiosis in cell division?,v1,openai/gpt-oss-20b,1.2799,94,628,722,0.00019545,,N/A,success
+Q5,Explain the water cycle and describe its main stages.,v1,openai/gpt-oss-20b,1.6515,90,1134,1224,0.00034695,,N/A,success
+Q1,What is photosynthesis and why is it important for life on Earth?,v2,openai/gpt-oss-20b,0.8827,116,368,484,0.0001191,,N/A,success
+Q2,Explain the Pythagorean theorem and provide a real-world example.,v2,openai/gpt-oss-20b,1.1045,116,687,803,0.0002148,,N/A,success
+Q3,What is Newton's second law of motion and how is it applied in everyday life?,v2,openai/gpt-oss-20b,0.9759,119,510,629,0.00016192,,N/A,success
+Q4,What is the difference between mitosis and meiosis in cell division?,v2,openai/gpt-oss-20b,7.3879,116,470,586,0.0001497,,N/A,success
+Q5,Explain the water cycle and describe its main stages.,v2,openai/gpt-oss-20b,6.1594,112,567,679,0.0001785,,N/A,success
+Q1,What is photosynthesis and why is it important for life on Earth?,v3,openai/gpt-oss-20b,4.7946,150,274,424,9.345e-05,1.0,Valid JSON,success
+Q2,Explain the Pythagorean theorem and provide a real-world example.,v3,openai/gpt-oss-20b,4.9021,150,219,369,7.695e-05,1.0,Valid JSON,success
+Q3,What is Newton's second law of motion and how is it applied in everyday life?,v3,openai/gpt-oss-20b,0.6711,153,262,415,9.007e-05,1.0,Valid JSON,success
+Q4,What is the difference between mitosis and meiosis in cell division?,v3,openai/gpt-oss-20b,0.6991,150,225,375,7.875e-05,1.0,Valid JSON,success
+Q5,Explain the water cycle and describe its main stages.,v3,openai/gpt-oss-20b,5.8705,146,317,463,0.00010605,1.0,Valid JSON,success
