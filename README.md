@@ -53,51 +53,70 @@ GROQ_API_KEY=gsk_...
 
 ---
 
-## Installation
+## Quick start (Windows lab) — automated
 
-```bash
-# 1. Clone the repo
+```powershell
 git clone https://github.com/rnagaraj13/eduassist-llmops.git
 cd eduassist-llmops
 
-# 2. (Optional) create a virtual environment
-python3 -m venv .venv
-source .venv/bin/activate   # Windows: .venv\Scripts\activate
+# One-time setup (venv + deps). Pass your Groq key:
+.\setup.ps1 -ApiKey "gsk_..."
 
-# 3. Install dependencies
+# Terminal 1 — leave open
+.\run_mlflow.ps1
+
+# Terminal 2
+.\run_notebook.ps1
+```
+
+Then in the browser: open `LLMOps_Assignment.ipynb` → **Kernel → Restart & Run All**.
+
+If PowerShell blocks scripts:
+```powershell
+Set-ExecutionPolicy -Scope Process Bypass
+```
+
+Or double-click `setup.bat`, then edit `.env` with your key and run the two scripts above.
+
+---
+
+## Manual install (any OS)
+
+```bash
+git clone https://github.com/rnagaraj13/eduassist-llmops.git
+cd eduassist-llmops
+
+python -m venv .venv
+# Windows: .\.venv\Scripts\Activate.ps1
+# macOS/Linux: source .venv/bin/activate
+
 pip install -r requirements.txt
-pip install jupyter   # if needed
+pip install jupyter
 
-# 4. Set your Groq API key
-export GROQ_API_KEY="gsk_..."
+# copy .env.example -> .env and set GROQ_API_KEY
 ```
 
 ---
 
 ## MLflow UI
 
-Start the local MLflow tracking server **before** running the notebook:
+Automated: `.\run_mlflow.ps1`  
+Manual:
 
 ```bash
 mlflow ui --host 127.0.0.1 --port 5000
 ```
 
-Open your browser at: **http://127.0.0.1:5000**
-
-If running on a remote VM, tunnel from your laptop:
-
-```bash
-ssh -L 5000:127.0.0.1:5000 <user>@<vm-host>
-```
+Open: **http://127.0.0.1:5000**
 
 ---
 
 ## Steps to Reproduce the Experiment
 
-1. Create a free Groq key at https://console.groq.com/keys and export `GROQ_API_KEY`.
-2. Start the MLflow UI (command above).
-3. Open `LLMOps_Assignment.ipynb` in JupyterLab or VS Code.
-4. Run all cells in order from top to bottom (*Kernel → Restart & Run All*).
+1. Create a free Groq key at https://console.groq.com/keys.
+2. Run `.\setup.ps1 -ApiKey "gsk_..."` (Windows) or set `GROQ_API_KEY` / `.env`.
+3. Start MLflow (`.\run_mlflow.ps1`), then Jupyter (`.\run_notebook.ps1`).
+4. Open `LLMOps_Assignment.ipynb` → *Kernel → Restart & Run All*.
 5. The notebook will:
    - Make 5 API calls for Task 1 and collect latency data.
    - Compute token counts and costs for Task 2.
