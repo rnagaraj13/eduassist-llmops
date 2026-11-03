@@ -53,30 +53,34 @@ GROQ_API_KEY=gsk_...
 
 ---
 
-## Quick start (Windows lab) — automated
+## Quick start (Linux lab / bash) — automated
 
-```powershell
+Your BITS prompt looks like bash (`user@ip-...:~/workspace$`). Use these:
+
+```bash
 git clone https://github.com/rnagaraj13/eduassist-llmops.git
 cd eduassist-llmops
 
-# One-time setup (venv + deps). Pass your Groq key:
-.\setup.ps1 -ApiKey "gsk_..."
+chmod +x setup.sh run_mlflow.sh run_notebook.sh
+./setup.sh "gsk_..."
 
 # Terminal 1 — leave open
-.\run_mlflow.ps1
+./run_mlflow.sh
 
 # Terminal 2
+./run_notebook.sh
+```
+
+If Jupyter prints a URL with a token, open that in the browser (or VS Code port-forward).
+Then open `LLMOps_Assignment.ipynb` → **Kernel → Restart & Run All**.
+
+### Windows PowerShell (if the lab is actually Windows)
+
+```powershell
+.\setup.ps1 -ApiKey "gsk_..."
+.\run_mlflow.ps1
 .\run_notebook.ps1
 ```
-
-Then in the browser: open `LLMOps_Assignment.ipynb` → **Kernel → Restart & Run All**.
-
-If PowerShell blocks scripts:
-```powershell
-Set-ExecutionPolicy -Scope Process Bypass
-```
-
-Or double-click `setup.bat`, then edit `.env` with your key and run the two scripts above.
 
 ---
 
