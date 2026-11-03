@@ -9,11 +9,15 @@ Course: MLOps | Marks: 10 | Mode: Individual
 | Item | Value |
 |---|---|
 | Python | 3.10 or higher |
-| OpenAI model | `gpt-4o-mini` |
+| Provider | Groq (OpenAI-compatible API) |
+| Model | `openai/gpt-oss-20b` |
 | MLflow | ≥ 2.14.0 (Prompt Registry required) |
-| Pricing date | 2024-07-01 (USD) |
-| Pricing — input | $0.150 / 1M tokens |
-| Pricing — output | $0.600 / 1M tokens |
+| Pricing date | 2026-11-03 (USD) |
+| Pricing — input | $0.075 / 1M tokens |
+| Pricing — output | $0.30 / 1M tokens |
+
+> Groq free-tier API key: https://console.groq.com/keys  
+> Cost tables use Groq **published** on-demand rates for assignment economics.
 
 ---
 
@@ -33,18 +37,18 @@ python-dotenv>=1.0.0
 
 | Variable | Description |
 |---|---|
-| `OPENAI_API_KEY` | Your OpenAI API key — **never hard-code this** |
+| `GROQ_API_KEY` | Your Groq API key — **never hard-code this** |
 
 Set it before running the notebook:
 
 ```bash
-export OPENAI_API_KEY="sk-..."
+export GROQ_API_KEY="gsk_..."
 ```
 
 Or create a `.env` file in this directory:
 
 ```
-OPENAI_API_KEY=sk-...
+GROQ_API_KEY=gsk_...
 ```
 
 ---
@@ -52,18 +56,20 @@ OPENAI_API_KEY=sk-...
 ## Installation
 
 ```bash
-# 1. Clone / unzip the submission
-cd llmops_assignment
+# 1. Clone the repo
+git clone https://github.com/rnagaraj13/eduassist-llmops.git
+cd eduassist-llmops
 
 # 2. (Optional) create a virtual environment
-python -m venv .venv
+python3 -m venv .venv
 source .venv/bin/activate   # Windows: .venv\Scripts\activate
 
 # 3. Install dependencies
 pip install -r requirements.txt
+pip install jupyter   # if needed
 
-# 4. Set your API key
-export OPENAI_API_KEY="sk-..."
+# 4. Set your Groq API key
+export GROQ_API_KEY="gsk_..."
 ```
 
 ---
@@ -78,14 +84,21 @@ mlflow ui --host 127.0.0.1 --port 5000
 
 Open your browser at: **http://127.0.0.1:5000**
 
+If running on a remote VM, tunnel from your laptop:
+
+```bash
+ssh -L 5000:127.0.0.1:5000 <user>@<vm-host>
+```
+
 ---
 
 ## Steps to Reproduce the Experiment
 
-1. Start the MLflow UI (command above).
-2. Open `LLMOps_Assignment.ipynb` in JupyterLab or VS Code.
-3. Run all cells in order from top to bottom (*Kernel → Restart & Run All*).
-4. The notebook will:
+1. Create a free Groq key at https://console.groq.com/keys and export `GROQ_API_KEY`.
+2. Start the MLflow UI (command above).
+3. Open `LLMOps_Assignment.ipynb` in JupyterLab or VS Code.
+4. Run all cells in order from top to bottom (*Kernel → Restart & Run All*).
+5. The notebook will:
    - Make 5 API calls for Task 1 and collect latency data.
    - Compute token counts and costs for Task 2.
    - Register prompt versions `v1`, `v2`, `v3` in the MLflow Prompt Registry.
@@ -95,7 +108,7 @@ Open your browser at: **http://127.0.0.1:5000**
      MLflow experiment.
    - Compare prompt versions and promote the best one to the `production` alias.
    - Save `latency_tokens_cost.csv` and `prompt_evaluation_results.csv`.
-5. Take screenshots of the MLflow UI as listed below.
+6. Take screenshots of the MLflow UI as listed below.
 
 ---
 
@@ -124,5 +137,5 @@ Open your browser at: **http://127.0.0.1:5000**
 ## Academic Integrity
 
 - API keys are loaded from environment variables only; they are **never** committed to any file.
-- Pricing information is attributed to the OpenAI pricing page, model `gpt-4o-mini`, retrieved 2024-07-01 (USD).
-- If OpenAI API access is unavailable, substitute a locally-hosted open-source model (e.g. `ollama run mistral`), document the alternative clearly in the notebook, and estimate costs using the model's tokenizer and published hosting rates.
+- Pricing information is attributed to the Groq pricing page, model `openai/gpt-oss-20b`, retrieved 2026-11-03 (USD).
+- If Groq API access is unavailable, substitute a locally-hosted open-source model (e.g. `ollama run llama3.1`), document the alternative clearly in the notebook, and estimate costs using the model's tokenizer and published hosting rates.
