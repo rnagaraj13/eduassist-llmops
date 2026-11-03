@@ -10,11 +10,10 @@ if (-not (Test-Path $activate)) {
 
 if (Test-Path "mlflow.db") {
     Write-Host "==> Removing stale mlflow.db (avoids migration errors)" -ForegroundColor Yellow
-    Remove-Item "mlflow.db" -Force
+    Remove-Item "mlflow.db" -Force -ErrorAction SilentlyContinue
+    Get-ChildItem "mlflow.db-*" -ErrorAction SilentlyContinue | Remove-Item -Force
 }
-
-New-Item -ItemType Directory -Force -Path "mlruns" | Out-Null
 
 Write-Host "MLflow UI -> http://127.0.0.1:5000" -ForegroundColor Cyan
 Write-Host "Press Ctrl+C to stop."
-mlflow ui --backend-store-uri ./mlruns --host 127.0.0.1 --port 5000
+mlflow ui --backend-store-uri sqlite:///mlflow.db --host 127.0.0.1 --port 5000
